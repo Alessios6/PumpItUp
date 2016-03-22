@@ -2,7 +2,7 @@
  * This is a game with the purpose of helping elderly people recover from a 
  * hip prothese operation. 
  *
- * version 0.2
+ * version 0.5
  */
 package com.game.src.main;
 
