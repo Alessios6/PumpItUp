@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 /**
  *
  * @authors:
- * - Thomas nap
+ * - Thomas Nap
  * 
  */
 
@@ -36,7 +36,7 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage spriteSheet = null;
     private BufferedImage background = null;
     
-    private Wagon myWagon;
+    private Handler handler;
     
     
     //in this method all the objects are initialised
@@ -52,7 +52,8 @@ public class Game extends Canvas implements Runnable{
         
         addKeyListener(new KeyInput(this));
         
-        myWagon = new Wagon(200, 200, this);
+       handler = new Handler();
+       handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
     }
     
     //this method is used to start the thread
@@ -117,7 +118,7 @@ public class Game extends Canvas implements Runnable{
     //this method is where all the updates go
     private void tick(){ //update
         
-        myWagon.tick();
+        handler.tick();
         
     }
     
@@ -134,8 +135,8 @@ public class Game extends Canvas implements Runnable{
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.drawImage(background, -50, -300, null);
         
+        handler.render(g);
         
-        myWagon.render(g);
         
         //////////////////////////////////////
         g.dispose();
@@ -147,10 +148,10 @@ public class Game extends Canvas implements Runnable{
         int key = e.getKeyCode();
         
         if(key == KeyEvent.VK_LEFT){
-            myWagon.setVelocityX(-5);
+            
         }
         else if(key == KeyEvent.VK_RIGHT){
-            myWagon.setVelocityX(5);
+            //myWagon.setVelocityX(5);
         }
     }
     
@@ -158,10 +159,10 @@ public class Game extends Canvas implements Runnable{
        int key = e.getKeyCode();
        
        if(key == KeyEvent.VK_LEFT){
-           myWagon.setVelocityX(0);
+           //myWagon.setVelocityX(0);
        }
        if(key == KeyEvent.VK_RIGHT){
-           myWagon.setVelocityX(0);
+           //myWagon.setVelocityX(0);
        }
     }
     
