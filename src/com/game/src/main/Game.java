@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 /**
  *
  * @authors:
- * - Thomas nap
+ * - Thomas Nap
  * 
  */
 
@@ -36,19 +36,8 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage spriteSheet = null;
     private BufferedImage background = null;
     
-    
-    private Wagon myWagon;
-    
-    //railtracks
-    private RailTrack  myRailTrack1;
-    private RailTrack2 myRailTrack2;
-    private RailTrack3 myRailTrack3;
-    private RailTrack4 myRailTrack4;
-    private RailTrack5 myRailTrack5;
-    
-    
-    
-    
+    private Handler handler;
+
     //in this method all the objects are initialised
     private void init(){
         requestFocus(); //focus on the screen when app started
@@ -63,22 +52,9 @@ public class Game extends Canvas implements Runnable{
         
         addKeyListener(new KeyInput(this));
         
-        myWagon = new Wagon(200, 600, this);
-       
-        myRailTrack1 = new RailTrack(0, 790, this);
-        myRailTrack2 = new RailTrack2(32, 758, this);
-        myRailTrack3 = new RailTrack3(64, 730, this);
-        myRailTrack4 = new RailTrack4(96, 710, this);
-        myRailTrack5 = new RailTrack5(128, 700, this);
-        /*
-        myRailTrack6 = new RailTrack6(1110, 7900, this);
-        myRailTrack7 = new RailTrack7(1110, 7900, this);
-        myRailTrack8 = new RailTrack8(1110, 7900, this);
-        myRailTrack9 = new RailTrack9(1110, 7900, this);
-        myRailTrack10 = new RailTrack10(1110, 7900, this);
-        myRailTrack11 = new RailTrack11(1110, 7900, this);
-        myRailTrack12 = new RailTrack12(1110, 7900, this);
-        */
+
+       handler = new Handler();
+       handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
     }
     
     //this method is used to start the thread
@@ -143,25 +119,7 @@ public class Game extends Canvas implements Runnable{
     //this method is where all the updates go
     private void tick(){ //update
         
-        myWagon.tick();
-        
-        myRailTrack1.tick();
-        myRailTrack2.tick();
-        myRailTrack3.tick();
-        myRailTrack4.tick();
-        myRailTrack5.tick();
-       /* myRailTrack6.tick();
-        myRailTrack7.tick();
-        myRailTrack8.tick();
-        myRailTrack9.tick();
-        myRailTrack10.tick();
-        myRailTrack11.tick();
-        myRailTrack12.tick();
-        */
-      
-        
-        
-        
+        handler.tick();
     }
     
     //this method draws all the objects on screen
@@ -177,23 +135,9 @@ public class Game extends Canvas implements Runnable{
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.drawImage(background, -50, -300, null);
         
+        //////////////////////////////////////
         
-        myWagon.render(g);
-        
-        myRailTrack1.render(g);
-        myRailTrack2.render(g);
-        myRailTrack3.render(g);
-        myRailTrack4.render(g);
-        myRailTrack5.render(g);
-       /* myRailTrack6.render(g);
-        myRailTrack7.render(g);
-        myRailTrack8.render(g);
-        myRailTrack9.render(g);
-        myRailTrack10.render(g);
-        myRailTrack11.render(g);
-        myRailTrack12.render(g);
-        */
-        
+        handler.render(g);
         
         
         //////////////////////////////////////
@@ -206,10 +150,10 @@ public class Game extends Canvas implements Runnable{
         int key = e.getKeyCode();
         
         if(key == KeyEvent.VK_LEFT){
-            myWagon.setVelocityX(-5);
+            
         }
         else if(key == KeyEvent.VK_RIGHT){
-            myWagon.setVelocityX(5);
+            //myWagon.setVelocityX(5);
         }
     }
     
@@ -217,10 +161,10 @@ public class Game extends Canvas implements Runnable{
        int key = e.getKeyCode();
        
        if(key == KeyEvent.VK_LEFT){
-           myWagon.setVelocityX(0);
+           //myWagon.setVelocityX(0);
        }
        if(key == KeyEvent.VK_RIGHT){
-           myWagon.setVelocityX(0);
+           //myWagon.setVelocityX(0);
        }
     }
     
