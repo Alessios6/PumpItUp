@@ -25,7 +25,7 @@ import javax.swing.JFrame;
 public class Game extends Canvas implements Runnable{
     
     public static final int WIDTH = 540;
-    public static final int HEIGHT = WIDTH / 12 * 9;
+    public static final int HEIGHT = WIDTH / 12 * 9; //405
     public static final int SCALE = 2;
     public final String TITLE = "PumpItUp";
     
@@ -37,8 +37,7 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage background = null;
     
     private Handler handler;
-    
-    
+
     //in this method all the objects are initialised
     private void init(){
         requestFocus(); //focus on the screen when app started
@@ -46,12 +45,14 @@ public class Game extends Canvas implements Runnable{
         try{
             spriteSheet = loader.loadImage("/sprite_sheet.png");
             background = loader.loadImage("/background.png");
+            
         } catch (IOException e){
             e.printStackTrace();
         }
         
         addKeyListener(new KeyInput(this));
         
+
        handler = new Handler();
        handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
     }
@@ -119,7 +120,6 @@ public class Game extends Canvas implements Runnable{
     private void tick(){ //update
         
         handler.tick();
-        
     }
     
     //this method draws all the objects on screen
@@ -134,6 +134,8 @@ public class Game extends Canvas implements Runnable{
         ///////Draw everything below//////////
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.drawImage(background, -50, -300, null);
+        
+        //////////////////////////////////////
         
         handler.render(g);
         
@@ -186,6 +188,7 @@ public class Game extends Canvas implements Runnable{
     
     public BufferedImage getSpriteSheet(){
         return spriteSheet;
+     
     }
     
 }
