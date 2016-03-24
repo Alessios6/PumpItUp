@@ -7,7 +7,7 @@ package com.game.src.main;
 
 /**
  *
- * @author thoma
+ * @author Thomas Nap
  */
 public enum ID {
     PumpWagon(),

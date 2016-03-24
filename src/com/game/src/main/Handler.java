@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author thoma
+ * @author Thomas Nap
  */
 public class Handler {
     

@@ -36,10 +36,16 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage spriteSheet = null;
     private BufferedImage background = null;
     
+    // powerup
+    private PowerUp myPowerUp;
+
     private Handler handler;
+    
+
 
     //in this method all the objects are initialised
     private void init(){
+        
         requestFocus(); //focus on the screen when app started
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
@@ -50,11 +56,14 @@ public class Game extends Canvas implements Runnable{
             e.printStackTrace();
         }
         
-        addKeyListener(new KeyInput(this));
+        // powerup
+        myPowerUp = new PowerUp(400, 500, this);
+   
         
-
-       handler = new Handler();
-       handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
+        handler = new Handler();
+        this.addKeyListener(new KeyInput(handler));
+        handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
+       
     }
     
     //this method is used to start the thread
@@ -119,7 +128,10 @@ public class Game extends Canvas implements Runnable{
     //this method is where all the updates go
     private void tick(){ //update
         
+        myPowerUp.tick();
+        
         handler.tick();
+
     }
     
     //this method draws all the objects on screen
@@ -137,7 +149,14 @@ public class Game extends Canvas implements Runnable{
         
         //////////////////////////////////////
         
+
+        
+        myPowerUp.render(g);
+        
+       
+
         handler.render(g);
+
         
         
         //////////////////////////////////////
@@ -145,27 +164,14 @@ public class Game extends Canvas implements Runnable{
         bs.show();
     }
     
-    //key input goes below
-    public void keyPressed(KeyEvent e){
-        int key = e.getKeyCode();
-        
-        if(key == KeyEvent.VK_LEFT){
-            
-        }
-        else if(key == KeyEvent.VK_RIGHT){
-            //myWagon.setVelocityX(5);
-        }
-    }
-    
-    public void keyReleased(KeyEvent e){
-       int key = e.getKeyCode();
-       
-       if(key == KeyEvent.VK_LEFT){
-           //myWagon.setVelocityX(0);
-       }
-       if(key == KeyEvent.VK_RIGHT){
-           //myWagon.setVelocityX(0);
-       }
+    //this method makes sure that no object can get out of the screen
+    public static int clamp(int xVal, int min, int max){
+        if(xVal >= max)
+            return xVal = max;
+        else if(xVal <= min)
+            return xVal = min;
+        else
+            return xVal;
     }
     
     public static void main (String args[]){
