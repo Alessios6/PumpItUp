@@ -36,13 +36,14 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage spriteSheet = null;
     private BufferedImage background = null;
     
-<<<<<<< HEAD
+
     
-    private Wagon myWagon;
+    //private Wagon myWagon;
     // powerup
     private PowerUp myPowerUp;
     
     //railtracks
+    /*
     private RailTrack  myRailTrack1;
     private RailTrack2 myRailTrack2;
     private RailTrack3 myRailTrack3;
@@ -53,14 +54,14 @@ public class Game extends Canvas implements Runnable{
     private RailTrack  myRailTrack8;
     private RailTrack  myRailTrack9;
     private RailTrack  myRailTrack10;
+    */
     
     
     
-    
-=======
+
     private Handler handler;
 
->>>>>>> a998cf1f508a8ca2a76d4bb520c2f039dde5f966
+
     //in this method all the objects are initialised
     private void init(){
         requestFocus(); //focus on the screen when app started
@@ -75,33 +76,34 @@ public class Game extends Canvas implements Runnable{
         
         addKeyListener(new KeyInput(this));
         
-<<<<<<< HEAD
-        myWagon = new Wagon(200, 500, this);
+
+       // myWagon = new Wagon(200, 500, this);
         
         // powerup
         myPowerUp = new PowerUp(400, 500, this);
        // railtracks
+        /*
         myRailTrack1 = new RailTrack(0, 790, this);
         /*
         myRailTrack2 = new RailTrack2(32, 758, this);
         myRailTrack3 = new RailTrack3(64, 730, this);
         myRailTrack4 = new RailTrack4(96, 710, this);
         myRailTrack5 = new RailTrack5(128, 700, this);
-        */
+        
         myRailTrack6 = new RailTrack(32, 758, this);
         myRailTrack7 = new RailTrack(64, 726, this);
         myRailTrack8 = new RailTrack(96, 694, this);
         myRailTrack9 = new RailTrack(128, 662, this);
         myRailTrack10 = new RailTrack(160, 630, this);
-        /*
+        
         myRailTrack11 = new RailTrack11(1110, 7900, this);
         myRailTrack12 = new RailTrack12(1110, 7900, this);
         */
-=======
+
 
        handler = new Handler();
        handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
->>>>>>> a998cf1f508a8ca2a76d4bb520c2f039dde5f966
+
     }
     
     //this method is used to start the thread
@@ -166,18 +168,18 @@ public class Game extends Canvas implements Runnable{
     //this method is where all the updates go
     private void tick(){ //update
         
-<<<<<<< HEAD
-        myWagon.tick();
+
+       // myWagon.tick();
         
         myPowerUp.tick();
-        
+        /*
         myRailTrack1.tick();
        /* 
         myRailTrack2.tick();
         myRailTrack3.tick();
         myRailTrack4.tick();
         myRailTrack5.tick();
-        */
+        
         myRailTrack6.tick();
         myRailTrack7.tick();
         myRailTrack8.tick();
@@ -191,9 +193,9 @@ public class Game extends Canvas implements Runnable{
         
         
         
-=======
+
         handler.tick();
->>>>>>> a998cf1f508a8ca2a76d4bb520c2f039dde5f966
+
     }
     
     //this method draws all the objects on screen
@@ -209,20 +211,18 @@ public class Game extends Canvas implements Runnable{
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.drawImage(background, -50, -300, null);
         
-        //////////////////////////////////////
-        
-<<<<<<< HEAD
-        myWagon.render(g);
+        //////////////////////////////////////<<<<<<< HEAD
+        //myWagon.render(g);
         
         myPowerUp.render(g);
         
-        myRailTrack1.render(g);
+        //myRailTrack1.render(g);
         /*
         myRailTrack2.render(g);
         myRailTrack3.render(g);
         myRailTrack4.render(g);
         myRailTrack5.render(g);
-       */ myRailTrack6.render(g);
+        myRailTrack6.render(g);
         myRailTrack7.render(g);
         myRailTrack8.render(g);
         myRailTrack9.render(g);
@@ -232,9 +232,9 @@ public class Game extends Canvas implements Runnable{
         myRailTrack12.render(g);
         */
         
-=======
+
         handler.render(g);
->>>>>>> a998cf1f508a8ca2a76d4bb520c2f039dde5f966
+
         
         
         //////////////////////////////////////
