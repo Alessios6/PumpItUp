@@ -10,22 +10,43 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author thoma
+ * @author Thomas Nap
  */
 public class KeyInput extends KeyAdapter {
     
-    Game game;
+    private Handler handler;
     
-    public KeyInput(Game game){
-        this.game = game;
+    public KeyInput(Handler handler){
+        this.handler = handler;
     }
     
      public void keyPressed(KeyEvent e){
-        game.keyPressed(e);
+        int key = e.getKeyCode();
+        
+        for(int i = 0; i < handler.object.size(); i++){
+            GameObject tempObject = handler.object.get(i);
+            
+            if(tempObject.getId() == ID.PumpWagon){
+                
+                if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(5);
+                if(key == KeyEvent.VK_LEFT) tempObject.setVelX(-5);
+            }
+        }
+        
     }
     
     public void keyReleased(KeyEvent e){
-        game.keyReleased(e);
+        int key = e.getKeyCode();
+        
+        for (int i = 0; i < handler.object.size(); i++){
+            GameObject tempObject = handler.object.get(i);
+            
+            if(tempObject.getId() == ID.PumpWagon){
+                
+                if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(0);
+                if(key == KeyEvent.VK_LEFT) tempObject.setVelX(0);
+            }
+        }
     }
     
     

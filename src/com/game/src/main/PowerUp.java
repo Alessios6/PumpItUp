@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author alessio
+ * @author Alessio
  */
 public class PowerUp {
     

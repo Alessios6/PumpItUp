@@ -2,7 +2,7 @@
  * This is a game with the purpose of helping elderly people recover from a 
  * hip prothese operation. 
  *
- * version 0.2
+ * version 0.5
  */
 package com.game.src.main;
 
@@ -37,6 +37,7 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage background = null;
     
 
+
     
     //private Wagon myWagon;
     // powerup
@@ -59,11 +60,21 @@ public class Game extends Canvas implements Runnable{
     
     
 
+    // powerup
+    
+
+
     private Handler handler;
+    
+
+
+
+
 
 
     //in this method all the objects are initialised
     private void init(){
+        
         requestFocus(); //focus on the screen when app started
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
@@ -74,7 +85,8 @@ public class Game extends Canvas implements Runnable{
             e.printStackTrace();
         }
         
-        addKeyListener(new KeyInput(this));
+
+        //addKeyListener(new KeyInput(this));
         
 
        // myWagon = new Wagon(200, 500, this);
@@ -103,6 +115,16 @@ public class Game extends Canvas implements Runnable{
 
        handler = new Handler();
        handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
+
+
+        // powerup
+        myPowerUp = new PowerUp(400, 500, this);
+   
+        
+        handler = new Handler();
+        this.addKeyListener(new KeyInput(handler));
+        handler.addObject(new PumpWagon(100, 100, ID.PumpWagon, this));
+       
 
     }
     
@@ -169,6 +191,7 @@ public class Game extends Canvas implements Runnable{
     private void tick(){ //update
         
 
+
        // myWagon.tick();
         
         myPowerUp.tick();
@@ -194,6 +217,10 @@ public class Game extends Canvas implements Runnable{
         
         
 
+
+        myPowerUp.tick();
+        
+
         handler.tick();
 
     }
@@ -211,27 +238,23 @@ public class Game extends Canvas implements Runnable{
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.drawImage(background, -50, -300, null);
         
+
         //////////////////////////////////////<<<<<<< HEAD
         //myWagon.render(g);
         
         myPowerUp.render(g);
         
-        //myRailTrack1.render(g);
-        /*
-        myRailTrack2.render(g);
-        myRailTrack3.render(g);
-        myRailTrack4.render(g);
-        myRailTrack5.render(g);
-        myRailTrack6.render(g);
-        myRailTrack7.render(g);
-        myRailTrack8.render(g);
-        myRailTrack9.render(g);
-        myRailTrack10.render(g);
-        /*
-        myRailTrack11.render(g);
-        myRailTrack12.render(g);
-        */
+       
         
+
+        //////////////////////////////////////
+        
+
+        
+        myPowerUp.render(g);
+        
+       
+
 
         handler.render(g);
 
@@ -242,27 +265,14 @@ public class Game extends Canvas implements Runnable{
         bs.show();
     }
     
-    //key input goes below
-    public void keyPressed(KeyEvent e){
-        int key = e.getKeyCode();
-        
-        if(key == KeyEvent.VK_LEFT){
-            
-        }
-        else if(key == KeyEvent.VK_RIGHT){
-            //myWagon.setVelocityX(5);
-        }
-    }
-    
-    public void keyReleased(KeyEvent e){
-       int key = e.getKeyCode();
-       
-       if(key == KeyEvent.VK_LEFT){
-           //myWagon.setVelocityX(0);
-       }
-       if(key == KeyEvent.VK_RIGHT){
-           //myWagon.setVelocityX(0);
-       }
+    //this method makes sure that no object can get out of the screen
+    public static int clamp(int xVal, int min, int max){
+        if(xVal >= max)
+            return xVal = max;
+        else if(xVal <= min)
+            return xVal = min;
+        else
+            return xVal;
     }
     
     public static void main (String args[]){

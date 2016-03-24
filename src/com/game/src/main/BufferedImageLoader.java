@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author thoma
+ * @author Thomas Nap
  */
 public class BufferedImageLoader {
     

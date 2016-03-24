@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author thoma
+ * @author Thomas Nap
  */
 public class PumpWagon extends GameObject {
     
@@ -22,13 +22,13 @@ public class PumpWagon extends GameObject {
         
         SpriteSheet ss = new SpriteSheet(game.getSpriteSheet());
         wagon = ss.grabImage(1, 1, 32, 32);
-        
-        velX = 5;
-        
+       
     }
 
     public void tick() {
+        x += velX;
         
+        x = Game.clamp(x, 0, (Game.WIDTH * 2) - 20);
     }
 
     public void render(Graphics g) {
